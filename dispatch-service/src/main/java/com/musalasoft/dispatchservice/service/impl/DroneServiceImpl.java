@@ -6,12 +6,13 @@ import com.musalasoft.dispatchservice.model.dto.DroneDto;
 import com.musalasoft.dispatchservice.model.dto.LoadMedicationDto;
 import com.musalasoft.dispatchservice.model.dto.MedicationDto;
 import com.musalasoft.dispatchservice.model.dto.RegisterDroneDto;
+import com.musalasoft.dispatchservice.model.response.Response;
 import com.musalasoft.dispatchservice.service.DroneService;
 
 public class DroneServiceImpl implements DroneService{
 
     @Override
-    public Long register(RegisterDroneDto registerDroneDto) {
+    public Response<Long> register(RegisterDroneDto registerDroneDto) {
         // TODO Auto-generated method stub
         return null;
     }
