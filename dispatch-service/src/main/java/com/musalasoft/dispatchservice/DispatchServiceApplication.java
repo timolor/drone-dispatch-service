@@ -1,4 +1,4 @@
-package com.mulasoft.dispatchservice;
+package com.musalasoft.dispatchservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
