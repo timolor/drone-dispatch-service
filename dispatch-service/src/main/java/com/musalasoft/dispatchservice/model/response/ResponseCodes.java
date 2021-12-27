@@ -11,7 +11,7 @@ public enum ResponseCodes {
     private String code;
     private String message;
 
-    ResponseCodes(String code, String message){
+    ResponseCodes(String code, String message) {
         this.code = code;
         this.message = message;
     }

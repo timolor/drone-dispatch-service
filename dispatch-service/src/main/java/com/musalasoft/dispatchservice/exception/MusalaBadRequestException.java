@@ -6,7 +6,7 @@ public class MusalaBadRequestException extends RuntimeException {
     @Getter
     private String code;
 
-    public MusalaBadRequestException(String message, String code){
+    public MusalaBadRequestException(String message, String code) {
         super(message);
         this.code = code;
     }

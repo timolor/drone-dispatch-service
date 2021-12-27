@@ -6,9 +6,9 @@ public class MusalaResourceNotFoundException extends RuntimeException {
     @Getter
     private String code;
 
-    public MusalaResourceNotFoundException(String message, String code){
+    public MusalaResourceNotFoundException(String message, String code) {
         super(message);
         this.code = code;
     }
-    
+
 }

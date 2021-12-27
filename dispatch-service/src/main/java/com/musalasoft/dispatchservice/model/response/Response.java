@@ -13,7 +13,7 @@ public class Response<T> {
     private String message;
     private T data;
 
-    public static <T>Response<T> build(T data){
+    public static <T> Response<T> build(T data) {
         Response<T> response = new Response<>();
         response.setCode(ResponseCodes.SUCCESS.getCode());
         response.setMessage(ResponseCodes.SUCCESS.getMessage());
@@ -21,7 +21,7 @@ public class Response<T> {
         return response;
     }
 
-    public static <T>Response<T> build(String code, String message, T data){
+    public static <T> Response<T> build(String code, String message, T data) {
         Response<T> response = new Response<>();
         response.setCode(code);
         response.setMessage(message);
