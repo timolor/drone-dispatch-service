@@ -1,14 +1,11 @@
 package com.musalasoft.dispatchservice.entity;
 
-import java.io.Serializable;
-
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,21 +13,21 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
+@Table(name = "drones_medications")
 @AllArgsConstructor
 @NoArgsConstructor
 public class DroneMedication {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private DroneMedicationKey id;
+    @EmbeddedId
+    private DroneMedicationKey id = new DroneMedicationKey(); 
 
     @ManyToOne
     @MapsId("droneId")
-    @JoinColumn(name = "droneId")
+    @JoinColumn(name = "drone_id")
     Drone drone;
 
     @ManyToOne
     @MapsId("medicationId")
-    @JoinColumn(name = "medicationId")
+    @JoinColumn(name = "medication_id")
     Medication medication;
 
     private Boolean active;
