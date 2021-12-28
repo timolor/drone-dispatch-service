@@ -1,8 +1,9 @@
 package com.musalasoft.dispatchservice.model.dto;
 
+import lombok.Data;
 import lombok.Value;
 
-@Value
+@Data
 public class MedicationDto {
     private Long id;
     private String name;

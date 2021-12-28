@@ -4,6 +4,9 @@ import com.musalasoft.dispatchservice.model.dto.NewMedicationDto;
 import com.musalasoft.dispatchservice.model.response.Response;
 import com.musalasoft.dispatchservice.service.MedicationService;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MedicationServiceImpl implements MedicationService {
 
     @Override

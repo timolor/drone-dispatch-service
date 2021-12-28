@@ -32,4 +32,6 @@ public class DroneMedication {
     @MapsId("medicationId")
     @JoinColumn(name = "medicationId")
     Medication medication;
+
+    private Boolean active;
 }

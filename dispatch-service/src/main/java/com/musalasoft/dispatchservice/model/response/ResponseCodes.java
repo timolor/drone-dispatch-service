@@ -6,6 +6,7 @@ import lombok.Getter;
 public enum ResponseCodes {
     SUCCESS("00", "Successful"),
     BAD_REQUEST("10400", "Bad Request"),
+    NOT_FOUND("10404", "Not Found"),
     SYSYEM_ERROR("10500", "Something went wrong. Please try again later");
 
     private String code;
