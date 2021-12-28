@@ -7,6 +7,7 @@ import java.util.Optional;
 import com.musalasoft.dispatchservice.entity.Drone;
 import com.musalasoft.dispatchservice.entity.DroneMedication;
 import com.musalasoft.dispatchservice.entity.Medication;
+import com.musalasoft.dispatchservice.exception.MusalaBadRequestException;
 import com.musalasoft.dispatchservice.exception.MusalaResourceNotFoundException;
 import com.musalasoft.dispatchservice.model.dto.DroneDto;
 import com.musalasoft.dispatchservice.model.dto.LoadMedicationDto;
@@ -62,7 +63,11 @@ public class DroneServiceImpl implements DroneService {
         List<DroneMedication> droneMedications = new ArrayList<>();
 
         Drone drone = getDroneById(loadMedicationDto.getDroneId());
+
         List<Medication> medications = medicationRepository.findAll();
+
+        validateDroneLoad(drone, medications, loadMedicationDto);
+
         loadMedicationDto.medications.forEach(it -> {
             Optional<Medication> optionalMedication = medications.stream().filter(p -> p.getId().equals(it))
                     .findFirst();
@@ -125,5 +130,24 @@ public class DroneServiceImpl implements DroneService {
                     ResponseCodes.NOT_FOUND.getCode());
 
         return optionalDrone.get();
+    }
+
+    private void validateDroneLoad(Drone drone, List<Medication> medications, LoadMedicationDto loadMedicationDto) {
+        if (drone.getBatteryCapacity() < 25) {
+            drone.setState(DroneState.INACTIVE);
+            droneRepository.save(drone);
+
+            throw new MusalaBadRequestException("Drone battery is below the allowed threshold [25%]",
+                    ResponseCodes.BAD_REQUEST.getCode());
+        }
+
+        double totalWeight = medications.stream().filter(o -> loadMedicationDto.medications.contains(o.getId()))
+                .mapToDouble(o -> o.getWeight()).sum();
+        if (totalWeight > drone.getWeightLimit()) {
+            throw new MusalaBadRequestException(
+                    String.format("Medication weight is above the allowed threshold [d%]", drone.getWeightLimit()),
+                    ResponseCodes.BAD_REQUEST.getCode());
+        }
+
     }
 }
