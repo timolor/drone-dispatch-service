@@ -14,17 +14,21 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import javassist.NotFoundException;
+
 @ControllerAdvice(annotations = RestController.class)
+@ResponseBody
 public class ApiAdvice {
 
     @ExceptionHandler(MusalaResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response<?> handleResourceNotFoundException(MusalaResourceNotFoundException ex) {
         Response<?> response = new Response<>();
-        response.setCode(ex.getCode());
+        response.setCode(ResponseCodes.NOT_FOUND.getCode());
         response.setMessage(ex.getMessage());
         return response;
     }
@@ -33,7 +37,25 @@ public class ApiAdvice {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Response<?> handleBadRequestException(MusalaBadRequestException ex) {
         Response<?> response = new Response<>();
-        response.setCode(ex.getCode());
+        response.setCode(ResponseCodes.BAD_REQUEST.getCode());
+        response.setMessage(ex.getMessage());
+        return response;
+    }
+
+    @ExceptionHandler(Exception.class)
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    public Response<?> handleOtherExceptions(Exception ex) {
+        Response<?> response = new Response<>();
+        response.setCode(ResponseCodes.SYSYEM_ERROR.getCode());
+        response.setMessage(ex.getMessage());
+        return response;
+    }
+
+    @ExceptionHandler(NotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Response<?> handleNotFoundException(NotFoundException ex) {
+        Response<?> response = new Response<>();
+        response.setCode(ResponseCodes.NOT_FOUND.getCode());
         response.setMessage(ex.getMessage());
         return response;
     }
