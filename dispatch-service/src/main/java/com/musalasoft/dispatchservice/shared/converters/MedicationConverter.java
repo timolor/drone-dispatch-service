@@ -2,6 +2,7 @@ package com.musalasoft.dispatchservice.shared.converters;
 
 import com.musalasoft.dispatchservice.entity.Medication;
 import com.musalasoft.dispatchservice.model.dto.MedicationDto;
+import com.musalasoft.dispatchservice.model.dto.NewMedicationDto;
 
 import org.springframework.stereotype.Component;
 
@@ -17,5 +18,15 @@ public class MedicationConverter {
         medicationDto.setWeight(medication.getWeight());
 
         return medicationDto;
+    }
+
+    public Medication mapToEntity(final NewMedicationDto newMedicationDto){
+        Medication medication = new Medication();
+        medication.setCode(newMedicationDto.getCode());
+        medication.setName(newMedicationDto.getName());
+        medication.setImageUrl(newMedicationDto.getImageUrl());
+        medication.setWeight(newMedicationDto.getWeight());
+        
+        return medication;
     }
 }
