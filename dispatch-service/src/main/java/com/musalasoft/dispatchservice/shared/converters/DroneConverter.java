@@ -13,9 +13,10 @@ public class DroneConverter {
     
     public Drone mapToEntity(final RegisterDroneDto registerDroneDto){
         Drone drone = new Drone();
-        drone.setBateryCapacity(registerDroneDto.getBatteryCapacity());
+        drone.setBatteryCapacity(registerDroneDto.getBatteryCapacity());
         drone.setModel(DroneModel.valueOf(registerDroneDto.getModel()));
         drone.setWeightLimit(registerDroneDto.getWeightLimit());
+        drone.setSerialNumber(registerDroneDto.getSerialNumber());
         drone.setState(DroneState.IDLE);
 
         return drone;
@@ -27,7 +28,7 @@ public class DroneConverter {
         droneDto.setSerialNumber(drone.getSerialNumber());
         droneDto.setModel(drone.getModel().name());
         droneDto.setWeightLimit(drone.getWeightLimit());
-        droneDto.setBatteryCapacity(drone.getBateryCapacity());
+        droneDto.setBatteryCapacity(drone.getBatteryCapacity());
         
         return droneDto;
     }

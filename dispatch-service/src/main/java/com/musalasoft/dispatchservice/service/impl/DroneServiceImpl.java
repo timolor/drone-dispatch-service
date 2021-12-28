@@ -77,12 +77,12 @@ public class DroneServiceImpl implements DroneService {
             droneMedications.add(droneMedication);
         });
 
-        List<DroneMedication> resp = droneMedicationRepository.saveAll(droneMedications);
+        droneMedicationRepository.saveAll(droneMedications);
 
         drone.setState(DroneState.LOADED);
         droneRepository.save(drone);
 
-        return Response.build(resp);
+        return Response.build(null);
     }
 
     @Override
@@ -90,7 +90,8 @@ public class DroneServiceImpl implements DroneService {
         Drone drone = getDroneById(droneId);
         List<DroneMedication> droneMedications = droneMedicationRepository.findByDroneAndActiveTrue(drone);
         if (droneMedications.isEmpty())
-            return Response.build(ResponseCodes.NOT_FOUND.getCode(), ResponseCodes.NOT_FOUND.getMessage(), null);
+            return Response.build(ResponseCodes.NOT_FOUND.getCode(),
+                    String.format("No medications found for drone with id %d", droneId), null);
 
         List<MedicationDto> medicationDtos = CollectionUtils.mapToList(droneMedications,
                 entitity -> medicationConverter.mapToDto(entitity.getMedication()));
@@ -100,7 +101,7 @@ public class DroneServiceImpl implements DroneService {
 
     @Override
     public Response<List<DroneDto>> getAvailableDrones() {
-        List<Drone> drones = droneRepository.findByStateIs(DroneState.IDLE.name());
+        List<Drone> drones = droneRepository.findByStateIs(DroneState.IDLE);
         if (drones.isEmpty())
             return Response.build(ResponseCodes.NOT_FOUND.getCode(), ResponseCodes.NOT_FOUND.getMessage(), null);
 
@@ -112,7 +113,7 @@ public class DroneServiceImpl implements DroneService {
     @Override
     public Response<Double> getBatteryLevel(long droneId) {
         Drone drone = getDroneById(droneId);
-        double batteryLevel = drone.getBateryCapacity();
+        double batteryLevel = drone.getBatteryCapacity();
 
         return Response.build(batteryLevel);
     }
