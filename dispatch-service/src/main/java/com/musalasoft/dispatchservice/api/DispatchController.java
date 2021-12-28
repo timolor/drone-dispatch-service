@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 // Ensure all validations are done
 // Job to check battery
 // Seeder
+// Validate DroneModel Enum properly
 
 @RestController
 @RequestMapping("/api/dispatch/")
@@ -50,7 +51,7 @@ public class DispatchController {
     }
 
     @GetMapping(path = "medications/{droneId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public Response<?> fetchMedications(@PathVariable("id") long droneId) {
+    public Response<?> fetchMedications(@PathVariable("droneId") long droneId) {
         return droneService.getMedications(droneId);
     }
 
@@ -59,8 +60,8 @@ public class DispatchController {
         return droneService.getAvailableDrones();
     }
 
-    @PostMapping(path = "battery-level/{droneId}", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    public Response<?> getBatteryLevel(@PathVariable("id") long droneId) {
+    @GetMapping(path = "battery-level/{droneId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public Response<?> getBatteryLevel(@PathVariable("droneId") long droneId) {
         return droneService.getBatteryLevel(droneId);
     }
 
