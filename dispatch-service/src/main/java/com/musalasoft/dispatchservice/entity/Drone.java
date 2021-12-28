@@ -1,6 +1,5 @@
 package com.musalasoft.dispatchservice.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -18,6 +17,7 @@ import com.musalasoft.dispatchservice.model.enums.DroneState;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -25,8 +25,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "drones")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Drone implements Serializable {
-    private static final long serialVersionUID = 4471777119419172871L;
+@EqualsAndHashCode(callSuper = true)
+public class Drone extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

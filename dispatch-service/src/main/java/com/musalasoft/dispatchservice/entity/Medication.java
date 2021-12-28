@@ -1,6 +1,5 @@
 package com.musalasoft.dispatchservice.entity;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -13,6 +12,7 @@ import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 @Data
@@ -20,7 +20,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "medications")
 @NoArgsConstructor
 @AllArgsConstructor
-public class Medication implements Serializable {
+@EqualsAndHashCode(callSuper = true)
+public class Medication extends Audit {
     private static final long serialVersionUID = 4471777119419172872L;
 
     @Id

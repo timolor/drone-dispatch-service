@@ -5,9 +5,12 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RegisterDroneDto {
     @NotBlank(message = "serial number is required")
     @Size(min = 2, message = "Min 2 characters is required for serial number")

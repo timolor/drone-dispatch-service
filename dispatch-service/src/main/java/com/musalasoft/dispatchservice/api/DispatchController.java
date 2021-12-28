@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 // Job to check battery
 // Seeder
 // Validate DroneModel Enum properly
+// Prevent Drone from overload
 
 @RestController
 @RequestMapping("/api/dispatch/")

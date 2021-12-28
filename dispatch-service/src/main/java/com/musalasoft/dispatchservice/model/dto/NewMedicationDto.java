@@ -3,9 +3,12 @@ package com.musalasoft.dispatchservice.model.dto;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class NewMedicationDto {
     @NotBlank(message = "name is required")
     @Pattern(regexp="^[a-zA-Z0-9]+(?:-[a-zA-Z0-9]+)*+(?:_[a-zA-Z0-9]+)*$",message="Only letters, numbers, ‘-‘, ‘_’ are allowed")  
