@@ -26,6 +26,7 @@ import com.musalasoft.dispatchservice.shared.converters.MedicationConverter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class DroneServiceImpl implements DroneService {
@@ -58,6 +59,7 @@ public class DroneServiceImpl implements DroneService {
         return Response.build(drone.getId());
     }
 
+    @Transactional
     @Override
     public Response<List<DroneMedication>> load(LoadMedicationDto loadMedicationDto) {
         List<DroneMedication> droneMedications = new ArrayList<>();

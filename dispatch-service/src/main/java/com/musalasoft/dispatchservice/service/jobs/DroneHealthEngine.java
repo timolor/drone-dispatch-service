@@ -40,8 +40,6 @@ public class DroneHealthEngine {
                 LocalDateTime.now().toEpochSecond(ZoneOffset.UTC));
 
         try {
-            // the best practice will be to batch the selection process
-            // using the last updated time or status
             List<Drone> drones = droneRepository.findAll();
             List<Drone> modifiedDrones = new ArrayList<Drone>();
 
