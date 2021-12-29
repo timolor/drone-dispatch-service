@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DroneDto {
-    private long id;
+    private Long id;
     private String serialNumber;
     private String model;
-    private double weightLimit;
-    private double batteryCapacity;
+    private Double weightLimit;
+    private Double batteryCapacity;
 }

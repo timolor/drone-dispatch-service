@@ -8,6 +8,8 @@ import com.musalasoft.dispatchservice.exception.MusalaResourceNotFoundException;
 import com.musalasoft.dispatchservice.model.response.Response;
 import com.musalasoft.dispatchservice.model.response.ResponseCodes;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -24,6 +26,8 @@ import javassist.NotFoundException;
 @ResponseBody
 public class ApiAdvice {
 
+    Logger logger = LoggerFactory.getLogger(ApiAdvice.class);
+
     @ExceptionHandler(MusalaResourceNotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public Response<?> handleResourceNotFoundException(MusalaResourceNotFoundException ex) {
@@ -39,6 +43,7 @@ public class ApiAdvice {
         Response<?> response = new Response<>();
         response.setCode(ResponseCodes.BAD_REQUEST.getCode());
         response.setMessage(ex.getMessage());
+        logger.error(ex.getMessage(), ex);
         return response;
     }
 
@@ -48,6 +53,7 @@ public class ApiAdvice {
         Response<?> response = new Response<>();
         response.setCode(ResponseCodes.SYSYEM_ERROR.getCode());
         response.setMessage(ex.getMessage());
+        logger.error(ex.getMessage(), ex);
         return response;
     }
 
@@ -57,6 +63,7 @@ public class ApiAdvice {
         Response<?> response = new Response<>();
         response.setCode(ResponseCodes.NOT_FOUND.getCode());
         response.setMessage(ex.getMessage());
+        logger.error(ex.getMessage(), ex);
         return response;
     }
 
@@ -69,6 +76,7 @@ public class ApiAdvice {
         response.setCode(ResponseCodes.BAD_REQUEST.getCode());
         response.setMessage(ResponseCodes.BAD_REQUEST.getMessage());
         response.setData(fieldErrors.stream().map(x -> x.getDefaultMessage()).collect(Collectors.toList()));
+        logger.error(ex.getMessage(), ex);
         return response;
     }
 }

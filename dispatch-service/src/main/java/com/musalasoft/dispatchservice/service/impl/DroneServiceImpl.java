@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import com.musalasoft.dispatchservice.entity.Drone;
 import com.musalasoft.dispatchservice.entity.DroneMedication;
 import com.musalasoft.dispatchservice.entity.Medication;
@@ -13,6 +15,7 @@ import com.musalasoft.dispatchservice.model.dto.DroneDto;
 import com.musalasoft.dispatchservice.model.dto.LoadMedicationDto;
 import com.musalasoft.dispatchservice.model.dto.MedicationDto;
 import com.musalasoft.dispatchservice.model.dto.RegisterDroneDto;
+import com.musalasoft.dispatchservice.model.dto.UpdateDroneBatteryDto;
 import com.musalasoft.dispatchservice.model.enums.DroneState;
 import com.musalasoft.dispatchservice.model.response.Response;
 import com.musalasoft.dispatchservice.model.response.ResponseCodes;
@@ -125,6 +128,15 @@ public class DroneServiceImpl implements DroneService {
         return Response.build(batteryLevel);
     }
 
+    @Override
+    public Response<Double> setBatteryLevel(@Valid UpdateDroneBatteryDto updateDroneBatteryDto) {
+        Drone drone = getDroneById(updateDroneBatteryDto.getDroneId());
+        drone.setBatteryCapacity(updateDroneBatteryDto.getBatteryLevel());
+        drone = droneRepository.save(drone);
+
+        return Response.build(drone.getBatteryCapacity());
+    }
+
     private Drone getDroneById(long droneId) {
         Optional<Drone> optionalDrone = droneRepository.findById(droneId);
         if (!optionalDrone.isPresent())
@@ -147,7 +159,7 @@ public class DroneServiceImpl implements DroneService {
                 .mapToDouble(o -> o.getWeight()).sum();
         if (totalWeight > drone.getWeightLimit()) {
             throw new MusalaBadRequestException(
-                    String.format("Medication weight is above the allowed threshold [d%]", drone.getWeightLimit()),
+                    String.format("Medication weight is above the allowed threshold %.2f", drone.getWeightLimit()),
                     ResponseCodes.BAD_REQUEST.getCode());
         }
 

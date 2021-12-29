@@ -10,6 +10,7 @@ import com.musalasoft.dispatchservice.model.dto.LoadMedicationDto;
 import com.musalasoft.dispatchservice.model.dto.MedicationDto;
 import com.musalasoft.dispatchservice.model.dto.NewMedicationDto;
 import com.musalasoft.dispatchservice.model.dto.RegisterDroneDto;
+import com.musalasoft.dispatchservice.model.dto.UpdateDroneBatteryDto;
 import com.musalasoft.dispatchservice.model.response.Response;
 import com.musalasoft.dispatchservice.service.DroneService;
 import com.musalasoft.dispatchservice.service.MedicationService;
@@ -22,16 +23,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-// TODO Audit Log
-// Add auditable timestamps
-// Logger
-// Unit tests
-// Ensure all validations are done
-// Job to check battery
-// Seeder
-// Validate DroneModel Enum properly
-// Prevent Drone from overload
 
 @RestController
 @RequestMapping("/api/dispatch/")
@@ -69,6 +60,11 @@ public class DispatchController {
     @GetMapping(path = "battery-level/{droneId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public Response<Double> getBatteryLevel(@PathVariable("droneId") long droneId) {
         return droneService.getBatteryLevel(droneId);
+    }
+
+    @PostMapping(path = "battery-level", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Response<Double> setBatteryLevel(@RequestBody @Valid UpdateDroneBatteryDto updateDroneBatteryDto) {
+        return droneService.setBatteryLevel(updateDroneBatteryDto);
     }
 
     @PostMapping(path = "create-medication", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -6,6 +6,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.musalasoft.dispatchservice.model.enums.DroneModel;
 
 import lombok.Data;
 
@@ -16,11 +17,14 @@ public class RegisterDroneDto {
     @Size(min = 2, message = "Min 2 characters is required for serial number")
     @Size(max = 100, message = "Max 100 characters is allowed for serial number")
     private String serialNumber;
-    private String model;
+    
+    private DroneModel model;
+
     @DecimalMin(value = "1.0", message = "weight limit must be greater than 1gr")
     @DecimalMax(value = "500.0", message = "weight limit must not be greater than 500gr")
-    private double weightLimit;
-    @DecimalMin(value = "1.0", message = "battery capacity must be greater than 1%")
+    private Double weightLimit;
+
+    @DecimalMin(value = "1.0", message = "battery capacity must be greater than 0%")
     @DecimalMax(value = "100.0", message = "battery capacity must not be greater than 100%")
-    private double batteryCapacity;
+    private Double batteryCapacity;
 }
