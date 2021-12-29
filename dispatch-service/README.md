@@ -8,7 +8,7 @@
 
 ---
 
-## Requirements
+### Requirements
 For building and running the application you need:
 
 - [JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-doc-downloads.html)
@@ -16,7 +16,7 @@ For building and running the application you need:
 
 ---
 
-## Running the application locally
+### Running the application locally
 
 There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.musalasoft.dispatchservice.DispatchServiceApplication` class from your IDE.
 
