@@ -12,7 +12,7 @@
 	<artifactId>dispatch-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>dispatch-service</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Dispatch Service for Drone: MusalaSoft</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>

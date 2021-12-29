@@ -6,6 +6,27 @@
 
 :scroll: **START**
 
+---
+
+## Requirements
+For building and running the application you need:
+
+- [JDK 11](https://www.oracle.com/java/technologies/javase-jdk11-doc-downloads.html)
+- [Maven 4](https://maven.apache.org)
+
+---
+
+## Running the application locally
+
+There are several ways to run a Spring Boot application on your local machine. One way is to execute the `main` method in the `com.musalasoft.dispatchservice.DispatchServiceApplication` class from your IDE.
+
+Alternatively you can use the [Spring Boot Maven plugin](https://docs.spring.io/spring-boot/docs/current/reference/html/build-tool-plugins-maven-plugin.html) like so:
+
+```shell
+mvn spring-boot:run
+```
+
+---
 
 ### Introduction
 
@@ -67,6 +88,14 @@ While implementing your solution **please take care of the following requirement
 - JUnit tests are optional but advisable (if you have time);
 - Advice: Show us how you work through your commit history.
 
+---
+
+#### Assumptions
+
+- The drones periodically send their battery status;
+- Service can't ensure that drones will send their battery status;
+- Introduced a new Drone state INACTIVE for drones that don't meet loading conditions;
+- An Endpoint is exposed where drones can send in their battery levels
 ---
 
 :scroll: **END** 
