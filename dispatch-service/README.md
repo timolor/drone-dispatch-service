@@ -90,12 +90,14 @@ While implementing your solution **please take care of the following requirement
 
 ---
 
-#### Assumptions
+#### Assumptions and Notes
 
 - The drones periodically send their battery status;
 - Service can't ensure that drones will send their battery status;
 - Introduced a new Drone state INACTIVE for drones that don't meet loading conditions;
 - An Endpoint is exposed where drones can send in their battery levels
+- Job running interval is specified in the `application.properties`
+
 ---
 
 :scroll: **END** 
